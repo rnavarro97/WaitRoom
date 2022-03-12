@@ -1,5 +1,6 @@
 package com.revature.waitroom
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -12,6 +13,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 
@@ -26,22 +28,20 @@ class Menu : ComponentActivity() {
 
 @Composable
 fun openMenu() {
+    val context = LocalContext.current
     Column(){
         Button(onClick={
-            Log.d("Button Clicked",
-            "Clicking Button")})
+            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have an appointment class
         {
             Text(text="Appointment Schedule")
         }
         Button(onClick={
-            Log.d("Button Clicked",
-                "Clicking Button")})
+            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have an document viewer class
         {
             Text(text="Document Viewer")
         }
         Button(onClick={
-            Log.d("Button Clicked",
-                "Clicking Button")})
+            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have a How-To class
         {
             Text(text="How-To")
         }
