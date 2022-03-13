@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaitRoom">
         <activity
+            android:name=".Appointments"
+            android:exported="false"
+            android:label="@string/title_activity_appointments"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
+            android:name=".VideoLibrary"
+            android:exported="false"
+            android:label="@string/title_activity_video_library"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
             android:name=".Menu"
             android:exported="false"
             android:label="@string/title_activity_menu"
