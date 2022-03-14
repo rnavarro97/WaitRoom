@@ -31,8 +31,7 @@ class VideoLibrary : ComponentActivity() {
 
 @Composable
 fun libraryPage() {
-    Text(text = "You've made quite a non-binary fuss" +
-            "to prevent intercontinental ballistic tweets.")
+    
 }
 
 @Preview(showBackground = true)
