@@ -32,6 +32,7 @@ class VideoLibrary : ComponentActivity() {
 
 @Composable
 fun libraryPage() {
+
     TopAppBar(title={Text("How-to Video Library")},
         navigationIcon = {
             IconButton(onClick = { /*TODO*/ })
@@ -43,6 +44,9 @@ fun libraryPage() {
     Column{
         
     }
+
+
+
 }
 
 @Preview(showBackground = true)
