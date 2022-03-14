@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -40,7 +41,13 @@ fun libraryPage() {
                 }
         }
     )
-    Column{
+    LazyColumn{
+        item(5){//I hardcoded 5, we will need to use a method to find out how many
+            //items are in the video library
+            Button(onClick={/*TODO*/ }){Text("Watch Video")}
+
+        }
+
         
     }
 }
