@@ -55,7 +55,7 @@ fun signUp() {
                 text1.value = it
             })
             Button(onClick = {
-                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
                 context.startActivity(Intent(context, Menu::class.java))
             }) {
                 Text("Sign up")
