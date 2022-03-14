@@ -1,17 +1,24 @@
 package com.revature.waitroom
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 
 class SignUp : ComponentActivity() {
@@ -33,14 +40,29 @@ class SignUp : ComponentActivity() {
 
 @Composable
 fun signUp() {
-    Button(onClick={
-        Log.d("Button Clicked",
-            "Clicking Button")})
-    {
-        Text(text="Sign Up")
+    Column {
+        val context = LocalContext.current
+        Column {
+            Text("Create username", modifier = Modifier.absoluteOffset(x = 16.dp))
+            var text = remember { mutableStateOf("") }
+            TextField(value = text.value, modifier = Modifier.padding(16.dp), onValueChange = {
+                text.value = it
+            })
+            Text("Create password", modifier = Modifier.absoluteOffset(x = 16.dp))
+            var text1 = remember { mutableStateOf(TextFieldValue("")) }
+            TextField(value = text1.value, modifier = Modifier
+                .padding(16.dp), onValueChange = {
+                text1.value = it
+            })
+            Button(onClick = {
+                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                context.startActivity(Intent(context, Menu::class.java))
+            }) {
+                Text("Sign up")
+            }
+        }
     }
 }
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview3() {
