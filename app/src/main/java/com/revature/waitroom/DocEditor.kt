@@ -1,5 +1,6 @@
 package com.revature.waitroom
 
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,28 +17,19 @@ class DocEditor : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WaitRoomTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting2("Android")
-                }
-            }
+
         }
     }
 }
 
 @Composable
-fun Greeting2(name: String) {
-    Text(text = "Hello $name!")
+fun fileShower() {
+
+
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview6() {
-    WaitRoomTheme {
-        Greeting2("Android")
-    }
+
 }
