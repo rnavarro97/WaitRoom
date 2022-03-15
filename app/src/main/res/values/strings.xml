@@ -5,4 +5,8 @@
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_video_library">VideoLibrary</string>
     <string name="title_activity_appointments">Appointments</string>
+    <string name="title_activity_video_player">VideoPlayer</string>
+    <string name="title_activity_doc_list">DocList</string>
+    <string name="title_activity_video_call">VideoCall</string>
+    <string name="title_activity_document_viewer">DocumentViewer</string>
 </resources>
