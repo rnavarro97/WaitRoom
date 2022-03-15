@@ -3,4 +3,6 @@
     <string name="title_activity_log_in">LogIn</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_video_library">VideoLibrary</string>
+    <string name="title_activity_appointments">Appointments</string>
 </resources>
