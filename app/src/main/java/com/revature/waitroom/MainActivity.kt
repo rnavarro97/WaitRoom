@@ -32,7 +32,7 @@ fun welcomeScreen(){
     val context=LocalContext.current
     Column()
     {
-        Text("WaitRoom", color= Color.Blue, fontSize=30.sp)
+        Text("Welcome to WaitRoom", color= Color.Blue, fontSize=30.sp)
 
         Button(onClick = {context.startActivity(Intent(context,SignUp::class.java))},
             modifier=Modifier.padding(16.dp))

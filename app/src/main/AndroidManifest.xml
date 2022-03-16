@@ -18,6 +18,34 @@
             android:name=".PlaceHolder"
             android:exported="false"
             android:label="@string/title_activity_place_holder"
+            android:name=".DocumentViewer"
+            android:exported="false"
+            android:label="@string/title_activity_document_viewer"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
+            android:name=".VideoCall"
+            android:exported="false"
+            android:label="@string/title_activity_video_call"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
+            android:name=".DocList"
+            android:exported="false"
+            android:label="@string/title_activity_doc_list"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
+            android:name=".VideoPlayer"
+            android:exported="false"
+            android:label="@string/title_activity_video_player"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
+            android:name=".Appointments"
+            android:exported="false"
+            android:label="@string/title_activity_appointments"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
+            android:name=".VideoLibrary"
+            android:exported="false"
+            android:label="@string/title_activity_video_library"
             android:theme="@style/Theme.WaitRoom" />
         <activity
             android:name=".Menu"
