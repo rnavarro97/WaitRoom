@@ -15,6 +15,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
+import com.revature.waitroom.ui.theme.is_long_enough
 
 class LogIn : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,14 +36,21 @@ fun login() {
             text.value = it
         })
         Text("Enter password", modifier = Modifier.absoluteOffset(x = 16.dp))
-        var text1 = remember { mutableStateOf(TextFieldValue("")) }
+        var text1 = remember { mutableStateOf("")}
         TextField(value = text1.value, modifier = Modifier
             .padding(16.dp), onValueChange = {
             text1.value = it
         })
         Button(onClick = {
-            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-            context.startActivity(Intent(context,Menu::class.java))
+            if(is_long_enough(text,text1) ==true)
+            {
+                Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
+                context.startActivity(Intent(context, Menu::class.java))
+            }
+            else
+            {
+                Toast.makeText(context, "The username or password is incorrect", Toast.LENGTH_SHORT).show()
+            }
         }) {
             Text("Finish")
         }
