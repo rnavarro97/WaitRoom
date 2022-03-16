@@ -30,6 +30,22 @@ class Menu : ComponentActivity() {
 
 @Composable
 fun openMenu() {
+
+    val context = LocalContext.current
+    Column(){
+        Button(onClick={
+            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have an appointment class
+        {
+            Text(text="Appointment Schedule")
+        }
+        Button(onClick={
+            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have an document viewer class
+        {
+            Text(text="Document Viewer")
+        }
+        Button(onClick={
+            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have a How-To class
+
     val context=LocalContext.current
     Column(){
         Button(onClick = {context.startActivity(Intent(context,Appointments::class.java))},
@@ -44,6 +60,7 @@ fun openMenu() {
         }
         Button(onClick = {context.startActivity(Intent(context,VideoLibrary::class.java))},
             modifier=Modifier.padding(16.dp))
+
         {
             Text(text="Video Library")
         }
