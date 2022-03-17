@@ -21,13 +21,13 @@ class LogIn : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-             login()
+             Login()
         }
     }
 }
 
 @Composable
-fun login() {
+fun Login() {
     val context=LocalContext.current
     Column {
         Text("Enter username", modifier = Modifier.absoluteOffset(x = 16.dp))
@@ -60,5 +60,5 @@ fun login() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
-login()
+Login()
 }
