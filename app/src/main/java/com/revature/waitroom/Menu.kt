@@ -23,55 +23,56 @@ class Menu : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            openMenu()
+            OpenMenu()
         }
     }
 }
 
 @Composable
-fun openMenu() {
+fun OpenMenu() {
 
     val context = LocalContext.current
     Column(){
         Button(onClick={
-            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have an appointment class
+            context.startActivity(Intent(context,Appointments::class.java))}) //should have an appointment class
         {
             Text(text="Appointment Schedule")
         }
         Button(onClick={
-            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have an document viewer class
+            context.startActivity(Intent(context,DocumentViewer::class.java))}) //should have an document viewer class
         {
             Text(text="Document Viewer")
         }
         Button(onClick={
-            context.startActivity(Intent(context,PlaceHolder::class.java))}) //should have a How-To class
+            context.startActivity(Intent(context,VideoLibrary::class.java))}){
+            Text(text = "Video Library")
+        } //should have a How-To class
 
-    val context=LocalContext.current
-    Column(){
-        Button(onClick = {context.startActivity(Intent(context,Appointments::class.java))},
-            modifier=Modifier.padding(16.dp))
+
+    Column() {
+        Button(
+            onClick = { context.startActivity(Intent(context, Appointments::class.java)) },
+            modifier = Modifier.padding(16.dp)
+        )
         {
-            Text(text="Appointment Schedule")
+            Text(text = "Appointment Schedule")
         }
-        Button(onClick = {context.startActivity(Intent(context,DocList::class.java))},
-            modifier=Modifier.padding(16.dp))
+        Button(
+            onClick = { context.startActivity(Intent(context, DocList::class.java)) },
+            modifier = Modifier.padding(16.dp)
+        )
         {
-            Text(text="Document Viewer")
+            Text(text = "Document Viewer")
         }
-        Button(onClick = {context.startActivity(Intent(context,VideoLibrary::class.java))},
-            modifier=Modifier.padding(16.dp))
+        Button(
+            onClick = { context.startActivity(Intent(context, VideoLibrary::class.java)) },
+            modifier = Modifier.padding(16.dp)
+        )
 
         {
-            Text(text="Video Library")
+            Text(text = "Video Library")
         }
     }
 
-}
+}}
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview4() {
-    WaitRoomTheme {
-        openMenu()
-    }
-}
