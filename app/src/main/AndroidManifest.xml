@@ -10,12 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaitRoom">
         <activity
+            android:name=".DocEditor"
+            android:exported="false"
+            android:label="@string/title_activity_doc_editor"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
+            android:name=".PlaceHolder"
+            android:exported="false"
+            android:label="@string/title_activity_place_holder"
+            android:theme="@style/Theme.WaitRoom" />
+        <activity
             android:name=".DocumentViewer"
             android:exported="false"
             android:label="@string/title_activity_document_viewer"
             android:theme="@style/Theme.WaitRoom" />
         <activity
-            android:name=".VideoCall"
+            android:name=".VideoCaller"
             android:exported="false"
             android:label="@string/title_activity_video_call"
             android:theme="@style/Theme.WaitRoom" />

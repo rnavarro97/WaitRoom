@@ -100,10 +100,3 @@ fun Appointment() {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview6() {
-    WaitRoomTheme {
-        Appointment()
-    }
-}
