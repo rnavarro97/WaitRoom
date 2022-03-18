@@ -1,10 +1,18 @@
 package com.revature.waitroom.ui.theme
 
-import androidx.compose.runtime.MutableState
 
-fun is_long_enough(username:MutableState<String>,password:MutableState<String>):Boolean
+fun is_long_enough(username:String,password:String):Boolean
 {
-    if(username.value.length>0&&password.value.length>5)
+    if(username.length>0&&password.length>5)
+    {
+        return true
+    }
+    return false
+}
+
+fun is_this(username:String,password:String):Boolean
+{
+    if (username.equals("Jon")&&password.equals("1234"))
     {
         return true
     }

@@ -1,4 +1,4 @@
-package com.example.groupproject01
+package com.revature.waitroom
 
 class Message {
 
