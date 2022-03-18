@@ -56,14 +56,21 @@ fun signUp() {
                 text1.value = it
             })
             Button(onClick = {
-                if(is_long_enough(text,text1)==true)
+                if(is_long_enough(text.value,text1.value)==true)
                 {
                     Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
                     context.startActivity(Intent(context, Menu::class.java))
                 }
                 else
                 {
-                    Toast.makeText(context, "The username or password is incorrect", Toast.LENGTH_SHORT).show()
+                    if(text.value.length==0) {
+                        Toast.makeText(context, "Please enter a username", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    else{
+                        Toast.makeText(context, "Please enter a long enough password", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
 
             }) {

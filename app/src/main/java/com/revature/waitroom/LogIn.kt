@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 import com.revature.waitroom.ui.theme.is_long_enough
+import com.revature.waitroom.ui.theme.is_this
 
 class LogIn : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +43,9 @@ fun Login() {
             text1.value = it
         })
         Button(onClick = {
-            if(is_long_enough(text,text1) ==true)
+            if(is_this(text.value,text1.value) ==true)
             {
-                Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
                 context.startActivity(Intent(context, Menu::class.java))
             }
             else
