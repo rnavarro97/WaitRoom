@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 import kotlinx.coroutines.launch
+import kotlin.text.Typography
 
 class Appointments : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,40 +72,28 @@ fun Appointment() {
                 }
             )
         },
-        floatingActionButtonPosition = FabPosition.End,
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                text = { Text("Begin Call") },
-                onClick = {context.startActivity(Intent(context,DocumentViewer::class.java))}
-            )
-        },
+
         content = {
             Column {
-                Image(
-                    painter = painterResource(id = R.drawable.calendar_widget),
-                    contentDescription = "Placeholder Calendar",
-                    modifier = Modifier.fillMaxWidth()
-                        .fillMaxHeight(0.3f)
-                )
-
+                Text(text="Enter Appointment Date and Time",
+                style = MaterialTheme.typography.h5)
                 TextField(value = date, modifier = Modifier
                     .padding(16.dp)
                     /*.fillMaxWidth()*/,
                     onValueChange = { date = it }, label = { Text("Enter appointment date") },
                     placeholder = { Text("Appointment Date") })
 
-                TextField(value = time, modifier = Modifier
-                    .padding(16.dp)
+                TextField(value = time,
+                    modifier = Modifier
+                        .padding(16.dp)
                     /*.fillMaxWidth()*/,
                     onValueChange = { time = it }, label = { Text("Enter appointment time") },
-                    placeholder = { Text("Appointment time") })
-
-                Image(
-                    painter = painterResource(id = R.drawable.clock_widget),
-                    contentDescription = "Placeholder Clock",
-                    modifier = Modifier.fillMaxWidth()
-                        .fillMaxHeight()
+                    placeholder = { Text("Appointment time") }
                 )
+
+                Button(onClick = {}, modifier=Modifier.padding(16.dp)) {Text("Enter")
+
+                }
             }
 
         }
