@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,10 +53,10 @@ fun signUp() {
             })
             Text("Create password", modifier = Modifier.absoluteOffset(x = 16.dp))
             var text1 = remember { mutableStateOf("") }
-            TextField(value = text1.value, modifier = Modifier
+            BasicTextField(value = text1.value, modifier = Modifier
                 .padding(16.dp), onValueChange = {
                 text1.value = it
-            })
+            }, visualTransformation = PasswordVisualTransformation())
             Button(onClick = {
                 if(is_long_enough(text.value,text1.value)==true)
                 {
