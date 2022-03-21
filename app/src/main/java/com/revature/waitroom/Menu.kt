@@ -8,13 +8,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
@@ -33,21 +31,21 @@ fun OpenMenu() {
 
     val context = LocalContext.current
     Column(){
-        Button(onClick={
-            context.startActivity(Intent(context,Appointments::class.java))}) //should have an appointment class
-        {
-            Text(text="Appointment Schedule")
-        }
-        Button(onClick={
-            context.startActivity(Intent(context,DocumentViewer::class.java))}) //should have an document viewer class
-        {
-            Text(text="Document Viewer")
-        }
-        Button(onClick={
-            context.startActivity(Intent(context,VideoLibrary::class.java))}){
-            Text(text = "Video Library")
-        } //should have a How-To class
-
+//        Button(onClick={
+//            context.startActivity(Intent(context,Appointments::class.java))}) //should have an appointment class
+//        {
+//            Text(text="Appointment Schedule")
+//        }
+//        Button(onClick={
+//            context.startActivity(Intent(context,DocumentViewer::class.java))}) //should have an document viewer class
+//        {
+//            Text(text="Document Viewer")
+//        }
+//        Button(onClick={
+//            context.startActivity(Intent(context,VideoLibrary::class.java))}){
+//            Text(text = "Video Library")
+//        } //should have a How-To class
+//
 
     Column() {
         Button(
@@ -57,6 +55,9 @@ fun OpenMenu() {
         {
             Text(text = "Appointment Schedule")
         }
+
+
+
         Button(
             onClick = { context.startActivity(Intent(context, DocList::class.java)) },
             modifier = Modifier.padding(16.dp)
@@ -70,7 +71,7 @@ fun OpenMenu() {
         )
 
         {
-            Text(text = "Video Library")
+            Text(text = "Tutorial Library")
         }
     }
 
