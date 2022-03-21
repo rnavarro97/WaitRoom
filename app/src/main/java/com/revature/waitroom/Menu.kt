@@ -72,7 +72,7 @@ fun OpenMenu() {
             modifier = Modifier.padding(16.dp)
         )
         {
-            Text(text = "Document Viewer")
+            Text(text = "Document List Viewer")
         }
         Button(
             onClick = { context.startActivity(Intent(context, VideoLibrary::class.java)) },
