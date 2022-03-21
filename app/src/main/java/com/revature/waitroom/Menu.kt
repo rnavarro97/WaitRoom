@@ -49,7 +49,7 @@ fun OpenMenu() {
 
     Column() {
         Button(
-            onClick = { context.startActivity(Intent(context, Appointments::class.java)) },
+            onClick = { context.startActivity(Intent(context, DateAndTimePicker::class.java)) },
             modifier = Modifier.padding(16.dp)
         )
         {

@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 import kotlinx.coroutines.launch
+import java.util.*
 
 class DocList : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +54,7 @@ fun docList() {
                 Button(onClick = {context.startActivity(Intent(context,Menu::class.java))}, Modifier.fillMaxWidth()) {
                     Text("Home")
                 }
-                Button(onClick = {context.startActivity(Intent(context,Appointments::class.java))}, Modifier.fillMaxWidth()) {
+                Button(onClick = {context.startActivity(Intent(context,DateAndTimePicker::class.java))}, Modifier.fillMaxWidth()) {
                     Text("Appointment Schedule")
                 }
                 Button(onClick = {context.startActivity(Intent(context,VideoLibrary::class.java))}, Modifier.fillMaxWidth()) {

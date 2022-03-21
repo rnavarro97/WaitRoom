@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaitRoom">
         <activity
+            android:name=".DateAndTimePicker"
+            android:exported="false" />
+        <activity
             android:name=".DocEditor"
             android:exported="false"
             android:label="@string/title_activity_doc_editor"
