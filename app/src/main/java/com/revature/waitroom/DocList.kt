@@ -57,7 +57,7 @@ fun docList() {
                     Text("Appointment Schedule")
                 }
                 Button(onClick = {context.startActivity(Intent(context,VideoLibrary::class.java))}, Modifier.fillMaxWidth()) {
-                    Text("Video Library")
+                    Text("Tutorial Library")
                 }
             }
         },
