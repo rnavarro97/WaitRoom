@@ -48,6 +48,17 @@ fun OpenMenu() {
 //
 
     Column() {
+        Button(onClick={
+            context.startActivity(Intent(context,Appointments::class.java))}) //should have an appointment class
+        {
+            Text(text="Appointment Schedule")
+        }
+        Button(onClick={
+            context.startActivity(Intent(context,DocumentViewer::class.java))}) //should have an document viewer class
+        {
+            Text(text="Document Viewer")
+        }
+
         Button(
             onClick = { context.startActivity(Intent(context, DateAndTimePicker::class.java)) },
             modifier = Modifier.padding(16.dp)
@@ -55,8 +66,6 @@ fun OpenMenu() {
         {
             Text(text = "Appointment Schedule")
         }
-
-
 
         Button(
             onClick = { context.startActivity(Intent(context, DocList::class.java)) },
@@ -69,9 +78,18 @@ fun OpenMenu() {
             onClick = { context.startActivity(Intent(context, VideoLibrary::class.java)) },
             modifier = Modifier.padding(16.dp)
         )
-
         {
             Text(text = "Tutorial Library")
+        }
+        Button(onClick={
+            context.startActivity(Intent(context,VideoLibrary::class.java))}){
+            Text(text = "Video Library")
+        }
+        Button(onClick = {context.startActivity(Intent(context, DocEditor::class.java))},
+            modifier = Modifier.padding(16.dp)
+        )
+        {
+            Text(text ="Doctor's Document Submission")
         }
     }
 
