@@ -6,16 +6,24 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 import com.revature.waitroom.ui.theme.is_long_enough
+import com.revature.waitroom.ui.theme.is_this
 
 class LogIn : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +46,15 @@ fun Login() {
         Text("Enter password", modifier = Modifier.absoluteOffset(x = 16.dp))
         var text1 = remember { mutableStateOf("")}
         TextField(value = text1.value, modifier = Modifier
-            .padding(16.dp), onValueChange = {
+            .padding(16.dp) , onValueChange = {
             text1.value = it
-        })
+        }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = PasswordVisualTransformation()
+        )
         Button(onClick = {
-            if(is_long_enough(text,text1) ==true)
+            if(is_this(text.value,text1.value) ==true)
             {
-                Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
                 context.startActivity(Intent(context, Menu::class.java))
             }
             else

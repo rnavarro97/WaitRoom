@@ -5,32 +5,52 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.revature.waitroom.data.InfoCards
+import com.revature.waitroom.R
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 
 class DocEditor : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            WaitRoomTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    PatientPrompt()
+                }
+
+            }
 
         }
     }
 }
 
 @Composable
-fun DocCard() {
-    val context = LocalContext.current
-
+fun DocCard(name:String,description:String) {
+//    val context = LocalContext.current
+//    var patientList:List<InfoCards>
     Card (
         modifier = Modifier
             .padding(20.dp)
@@ -42,29 +62,88 @@ fun DocCard() {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.padding(8.dp)) {
-              var name by  rememberSaveable { mutableStateOf("")}
-                TextField(value = name,
-                    onValueChange = {name = it},
-                    textStyle =MaterialTheme.typography.h3,
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.h2,
+                    color = MaterialTheme.colors.onSurface,
                     modifier = Modifier.padding(bottom = 8.dp),
-                    label = { Text(text = "Patient's name:")}
+                    fontSize = 20.sp
                 )
 
-                var description by  rememberSaveable { mutableStateOf("")}
-                TextField(value = description,
-                    onValueChange = {description = it},
-                    textStyle =MaterialTheme.typography.body2,
+                Text(text =description,
+                    style = MaterialTheme.typography.body2,
+                    color = MaterialTheme.colors.onSurface,
                     modifier = Modifier.padding(bottom = 4.dp),
-                    label = { Text(text = "Diagnosis:")},
-                    maxLines = 4
+                    fontSize = 12.sp
                 )
             }
         }
 
     }
+}
 
 
+//
+@Composable
+fun PatientPrompt(){
+    val patientList = mutableListOf<InfoCards>()
+    val context=LocalContext.current
 
-
+    Scaffold(
+        topBar = {
+           TopAppBar(backgroundColor = MaterialTheme.colors.primary,
+               title = { Text(text = "Patient Notes")} //Change to Patient Note List later
+           )
+        }
+    ) {
+        LazyColumn(modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(16.dp)
+        ){
+           item {
+               Row (
+                   modifier = Modifier
+                       .fillMaxWidth()
+                       .wrapContentHeight()
+                       .padding(vertical = 25.dp)
+               ){
+                   Text(text = "Patient Card Note View",
+                       style = MaterialTheme.typography.h1,
+                       fontSize = 40.sp
+                   )
+               }
+           }
+            item {
+                Column() {
+                    var text = rememberSaveable{ mutableStateOf("") }
+                    TextField(value = text.value,
+                        onValueChange = {text.value = it},
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        label = { Text(text = "Patient's name:")},
+                        maxLines = 1
+                    )
+                    var text1 = rememberSaveable { mutableStateOf("")}
+                    TextField(value = text1.value,
+                        onValueChange = {text1.value = it},
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                        modifier = Modifier.padding(bottom = 4.dp),
+                        label = { Text(text = "Diagnosis:")},
+                        maxLines = 4
+                    )
+                    Button(onClick = {
+                        val patient = InfoCards(text.value,text1.value)
+                        patientList.add(patient)
+                    }) {
+                        Text("Submit Information")
+                    }
+                }
+            }
+            items(patientList)
+            {patient->
+                DocCard(name = patient.name, description = patient.description)
+            }
+        }
+    }
+    
 }
 
