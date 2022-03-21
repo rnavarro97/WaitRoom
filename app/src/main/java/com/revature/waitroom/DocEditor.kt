@@ -38,15 +38,7 @@ class DocEditor : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val cardList:List<InfoCards>
-
-                    val navController = rememberNavController()
-                    NavHost(navController = navController,
-                        startDestination = DocCard(name = "Name Entry",
-                            description = "Diagnosis: Details"))
-                    {
-
-                    }
+                    PatientPrompt()
                 }
 
             }
@@ -56,7 +48,7 @@ class DocEditor : ComponentActivity() {
 }
 
 @Composable
-fun DocCard(name:String,description:String):String {
+fun DocCard(name:String,description:String) {
 //    val context = LocalContext.current
 //    var patientList:List<InfoCards>
     Card (
@@ -88,14 +80,14 @@ fun DocCard(name:String,description:String):String {
         }
 
     }
-  return name
 }
 
 
 //
 @Composable
-fun PatientPrompt(navController: NavController){
-    val patientList:List<InfoCards> = listOf()
+fun PatientPrompt(){
+    val patientList = mutableListOf<InfoCards>()
+    val context=LocalContext.current
 
     Scaffold(
         topBar = {
@@ -120,32 +112,35 @@ fun PatientPrompt(navController: NavController){
                    )
                }
            }
+            item {
+                Column() {
+                    var text = rememberSaveable{ mutableStateOf("") }
+                    TextField(value = text.value,
+                        onValueChange = {text.value = it},
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        label = { Text(text = "Patient's name:")},
+                        maxLines = 1
+                    )
+                    var text1 = rememberSaveable { mutableStateOf("")}
+                    TextField(value = text1.value,
+                        onValueChange = {text1.value = it},
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                        modifier = Modifier.padding(bottom = 4.dp),
+                        label = { Text(text = "Diagnosis:")},
+                        maxLines = 4
+                    )
+                    Button(onClick = {
+                        val patient = InfoCards(text.value,text1.value)
+                        patientList.add(patient)
+                    }) {
+                        Text("Submit Information")
+                    }
+                }
+            }
             items(patientList)
             {patient->
-                //BasicTextField ->patient.name
-                var text = rememberSaveable{ mutableStateOf("") }
-                TextField(value = patient.name,
-                    onValueChange = {patient.name = it},
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    label = { Text(text = "Patient's name:")},
-                    maxLines = 1
-                )
-                //BasicTextField ->patient.description
-                var text1 = rememberSaveable { mutableStateOf("")}
-                TextField(value = patient.description,
-                    onValueChange = {patient.description = it},
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                    modifier = Modifier.padding(bottom = 4.dp), 
-                    label = { Text(text = "Diagnosis:")},
-                    maxLines = 4
-                )
-                var card:String =DocCard(patient.name, patient.description)
-                Button(onClick = { navController.navigate(card)}) {
-                    Text("Submit Information")
-                }
-
-
+                DocCard(name = patient.name, description = patient.description)
             }
         }
     }
