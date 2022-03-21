@@ -2,6 +2,7 @@ package com.revature.waitroom
 
 import android.graphics.pdf.PdfDocument
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -135,6 +136,27 @@ fun PatientPrompt(){
                         patientList.add(patient)
                     }) {
                         Text("Submit Information")
+                    }
+                    //delete card button here
+                    Text(text = "Card Deletion")
+                    var nText = rememberSaveable { mutableStateOf("")}
+                    TextField(value = nText.value,
+                        onValueChange = {nText.value},
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        label = { Text(text = "Enter Name")},
+                        maxLines = 1
+                    )
+                    Button(onClick = {
+                        val delPatient = InfoCards(text.value,text1.value)
+                        if (nText.value.equals(text.value)){
+                            patientList.remove(delPatient)
+                        }
+                        else{
+                            Toast.makeText(context, "Invalid Entry", Toast.LENGTH_SHORT).show()
+                        }
+                    }) {
+                        Text(text = "Delete Card")
                     }
                 }
             }
