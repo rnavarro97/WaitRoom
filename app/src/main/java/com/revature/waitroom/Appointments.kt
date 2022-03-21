@@ -1,5 +1,7 @@
 package com.revature.waitroom
 
+import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.text.Typography
 
 class Appointments : ComponentActivity() {
@@ -43,6 +46,10 @@ fun Appointment() {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val context=LocalContext.current
+    val rightNow = Calendar.getInstance()
+    val iHour = rightNow.get(Calendar.HOUR_OF_DAY)
+    val iMinute = rightNow.get(Calendar.MINUTE)
+
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
@@ -54,7 +61,7 @@ fun Appointment() {
                     Text("Documents")
                 }
                 Button(onClick = {context.startActivity(Intent(context,VideoLibrary::class.java))}, Modifier.fillMaxWidth()) {
-                    Text("Video Library")
+                    Text("Tutorial Library")
                 }
             }
         },
@@ -75,21 +82,24 @@ fun Appointment() {
 
         content = {
             Column {
-                Text(text="Enter Appointment Date and Time",
-                style = MaterialTheme.typography.h5)
-                TextField(value = date, modifier = Modifier
-                    .padding(16.dp)
-                    /*.fillMaxWidth()*/,
-                    onValueChange = { date = it }, label = { Text("Enter appointment date") },
-                    placeholder = { Text("Appointment Date") })
 
-                TextField(value = time,
-                    modifier = Modifier
-                        .padding(16.dp)
-                    /*.fillMaxWidth()*/,
-                    onValueChange = { time = it }, label = { Text("Enter appointment time") },
-                    placeholder = { Text("Appointment time") }
-                )
+                ShowTimePicker(context = context, initHour = iHour, initMinute = iMinute)
+
+//                Text(text="Enter Appointment Date and Time",
+//                style = MaterialTheme.typography.h5)
+//                TextField(value = date, modifier = Modifier
+//                    .padding(16.dp)
+//                    /*.fillMaxWidth()*/,
+//                    onValueChange = { date = it }, label = { Text("Enter appointment date") },
+//                    placeholder = { Text("Appointment Date") })
+//
+//                TextField(value = time,
+//                    modifier = Modifier
+//                        .padding(16.dp)
+//                    /*.fillMaxWidth()*/,
+//                    onValueChange = { time = it }, label = { Text("Enter appointment time") },
+//                    placeholder = { Text("Appointment time") }
+//                )
 
                 Button(onClick = {}, modifier=Modifier.padding(16.dp)) {Text("Enter")
 
@@ -98,5 +108,21 @@ fun Appointment() {
 
         }
     )
+}
+
+@Composable
+fun ShowTimePicker(context: Context, initHour: Int, initMinute: Int) {
+    val time = remember { mutableStateOf("") }
+    val timePickerDialog = TimePickerDialog(
+        context,
+        {_, hour : Int, minute: Int ->
+            time.value = "$hour:$minute"
+        }, initHour, initMinute, false
+    )
+    Button(onClick = {
+        timePickerDialog.show()
+    }) {
+        Text(text = "Select Appointment Time")
+    }
 }
 

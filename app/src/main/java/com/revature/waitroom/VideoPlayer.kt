@@ -57,7 +57,7 @@ fun VideoTranscript() {
         },
         topBar = {
             TopAppBar(
-                title = { Text("Video Library") },
+                title = { Text("Tutorial") },
                 navigationIcon = {
                     IconButton(
                         onClick = {
@@ -70,6 +70,9 @@ fun VideoTranscript() {
             )
         },
         content= {
+            Column(modifier=Modifier.padding(8.dp)) {
+                
+            }
 
             Card(content = {
                 Text(
