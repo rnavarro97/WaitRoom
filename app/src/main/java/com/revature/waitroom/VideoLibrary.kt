@@ -50,7 +50,7 @@ fun vidList() {
                     Button(onClick = {context.startActivity(Intent(context,Menu::class.java))}, Modifier.fillMaxWidth()) {
                         Text("Home")
                     }
-                    Button(onClick = {context.startActivity(Intent(context,Appointments::class.java))}, Modifier.fillMaxWidth()) {
+                    Button(onClick = {context.startActivity(Intent(context,DateAndTimePicker::class.java))}, Modifier.fillMaxWidth()) {
                         Text("Appointment Schedule")
                     }
                     Button(onClick = {context.startActivity(Intent(context,DocList::class.java))}, Modifier.fillMaxWidth()) {
@@ -60,7 +60,7 @@ fun vidList() {
             },
             topBar = {
                 TopAppBar(
-                    title = { Text("Video Library") },
+                    title = { Text("Tutorial Library") },
                     navigationIcon = {
                         IconButton(
                             onClick = {
