@@ -5,9 +5,9 @@ This app is designed for doctors to set up appointments at hospitals.
 * Jetpack Compose
 # Features
 * Validation check for register
-* Valication for login
-* options page
-To do list:
+* Valication for login 
+* options page 
+# To-do list:
 * Link patient description page to rest of app
 * list hospital options
 * documents to edit
