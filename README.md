@@ -1,5 +1,12 @@
 # WaitRoom
-Group 3's 1st collab project
-This was the result after spending 2 weeks on this app. This was the first group project that we have done since starting at Revature.
-The register and login pages have been implemented by Jonathan Work. 
+# Description
 This app is designed for doctors to set up appointments at hospitals. 
+# Technologies
+* Jetpack Compose
+# Features
+To do list:
+* 
+# Contributors
+Jonathan Work, Richard Navarro, Micah Holt, Chinchu Terresa Jose
+# Getting Started
+
