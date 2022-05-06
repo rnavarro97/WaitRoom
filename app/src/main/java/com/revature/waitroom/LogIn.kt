@@ -68,15 +68,20 @@ fun Login(userViewModel: UserViewModel) {
            //     val users= allusers?.filter { it.username==text.value }
                 val liveuser = userViewModel.findUser(text.value)
                 liveuser.observeForever { user->
-                    if (user.username == text.value && user.password == text1.value) {
-                        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                        context.startActivity(Intent(context, Menu::class.java))
-                    } else {
-                        Toast.makeText(
-                            context,
-                            "The password is incorrect",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if(user!=null) {
+                        if (user.username == text.value && user.password == text1.value) {
+                            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                            context.startActivity(Intent(context, Menu::class.java))
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "The password is incorrect",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    else{
+                        Toast.makeText(context, "username does not exist", Toast.LENGTH_SHORT).show()
                     }
                 }
 
