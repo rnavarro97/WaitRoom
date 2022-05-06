@@ -18,20 +18,47 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.revature.waitroom.data.UserViewModel
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         setContent {
-            welcomeScreen()
+            navigation(userViewModel)
         }
     }
 }
 
+@Composable
+fun navigation(userViewModel: UserViewModel)
+{
+    var navController= rememberNavController()
+    NavHost(navController = navController, startDestination = Screens.Welcome.route
+    ){
+        composable(Screens.Welcome.route)
+        {
+            WelcomeScreen(navController)
+        }
+        composable(Screens.Signup.route)
+        {
+            SignUp(userViewModel = userViewModel,navController = navController)
+        }
+        composable(Screens.Login.route)
+        {
+            Login(userViewModel = userViewModel)
+        }
+    }
+}
 
 @Composable
-fun welcomeScreen(){
+fun WelcomeScreen(navController: NavController){
     val context=LocalContext.current
     Column(horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center)
@@ -43,16 +70,18 @@ fun welcomeScreen(){
             contentDescription = null // decorative element
         )
 
-        Button(onClick = {context.startActivity(Intent(context,SignUp::class.java))},
-            modifier=Modifier.padding(16.dp)
+        Button(onClick = {navController.navigate(Screens.Signup.route)},
+            modifier= Modifier
+                .padding(16.dp)
                 .fillMaxWidth())
         {
             Text(text="Sign Up")
 //            Context.startActivity(Intent
         }
 
-        Button(onClick = {context.startActivity(Intent(context,LogIn::class.java))},
-            modifier=Modifier.padding(16.dp)
+        Button(onClick = {navController.navigate(Screens.Login.route)},
+            modifier= Modifier
+                .padding(16.dp)
                 .fillMaxWidth())
         {
             Text(text="Log In")
@@ -66,5 +95,5 @@ fun welcomeScreen(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    welcomeScreen()
+   // welcomeScreen()
 }

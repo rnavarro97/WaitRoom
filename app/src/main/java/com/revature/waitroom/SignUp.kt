@@ -1,5 +1,6 @@
 package com.revature.waitroom
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,15 +8,14 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.absoluteOffset
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -23,12 +23,20 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import com.revature.waitroom.data.User
+import com.revature.waitroom.data.UserViewModel
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 import com.revature.waitroom.ui.theme.is_long_enough
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class SignUp : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         setContent {
             WaitRoomTheme {
                 // A surface container using the 'background' color from the theme
@@ -36,25 +44,38 @@ class SignUp : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    signUp()
+     //               signUp(userViewModel)
                 }
             }
         }
     }
 }
 
+@SuppressLint("UnrememberedGetBackStackEntry")
 @Composable
-fun signUp() {
-    Column {
-        val context = LocalContext.current
+fun SignUp(navController: NavController,userViewModel: UserViewModel) {
+    val context = LocalContext.current
+    val scope= rememberCoroutineScope()
+    try {
+        if (navController.currentBackStackEntry == navController.getBackStackEntry(Screens.Login.route)) {
+            Toast.makeText(context, "Please enter a different username", Toast.LENGTH_LONG).show()
+        }
+    }catch (e:Exception)
+    {
+
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+        Text(text = "Create your account",fontSize = 25.sp)
+        Spacer(modifier = Modifier.height(100.dp))
         Column {
             Text("Create username", modifier = Modifier.absoluteOffset(x = 16.dp))
-            var text = remember { mutableStateOf("") }
+            val text = remember { mutableStateOf("") }
             TextField(value = text.value, modifier = Modifier.padding(16.dp), onValueChange = {
                 text.value = it
             })
             Text("Create password", modifier = Modifier.absoluteOffset(x = 16.dp))
-            var text1 = remember { mutableStateOf("") }
+            val text1 = remember { mutableStateOf("") }
             TextField(value = text1.value, modifier = Modifier
                 .padding(16.dp) , onValueChange = {
                 text1.value = it
@@ -62,8 +83,10 @@ fun signUp() {
             Button(onClick = {
                 if(is_long_enough(text.value,text1.value)==true)
                 {
-                    Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
-                    context.startActivity(Intent(context, Menu::class.java))
+                    scope.launch {
+                        userViewModel.insertUser(User(username=text.value,password=text1.value),navController)
+                    }
+                        navController.navigate(Screens.Login.route)
                 }
                 else
                 {
@@ -78,7 +101,7 @@ fun signUp() {
                 }
 
             }) {
-                Text("Sign up")
+                Text("Sign up",modifier = Modifier.fillMaxWidth())
             }
         }
     }
@@ -87,6 +110,6 @@ fun signUp() {
 @Composable
 fun DefaultPreview3() {
     WaitRoomTheme {
-        signUp()
+       // signUp()
     }
 }
