@@ -91,7 +91,7 @@ fun SignUp(navController: NavController,userViewModel: UserViewModel) {
                 }
 
             }) {
-                Text("Sign up")
+                Text("Sign up",modifier = Modifier.fillMaxWidth())
             }
         }
     }

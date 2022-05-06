@@ -84,7 +84,7 @@ fun Login(userViewModel: UserViewModel) {
 
 
         }) {
-            Text("Finish")
+            Text("Finish",modifier = Modifier.fillMaxWidth())
         }
     }
 }
