@@ -9,7 +9,7 @@ import androidx.room.Query
 @Dao
 interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertUser(user: User)
 
     @Query("SELECT * FROM Users WHERE username == :name")

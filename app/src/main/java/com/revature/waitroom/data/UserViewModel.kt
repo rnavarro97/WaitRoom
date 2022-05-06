@@ -1,9 +1,13 @@
 package com.revature.waitroom.data
 
 import android.app.Application
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import com.revature.waitroom.Screens
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
@@ -13,9 +17,13 @@ class UserViewModel(application: Application):AndroidViewModel(application) {
     private val repository: UserRepository=UserRepository(application)
 
 
-    suspend fun insertUser(user: User) {
+    suspend fun insertUser(user: User,navController: NavController) {
          viewModelScope.launch {
-             repository.insertUser(user)
+             if(!repository.insertUser(user))
+             {
+                 navController.navigate(Screens.Signup.route)
+             }
+
          }
     }
 

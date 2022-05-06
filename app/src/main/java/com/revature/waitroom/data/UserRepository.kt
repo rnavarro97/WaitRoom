@@ -1,6 +1,8 @@
 package com.revature.waitroom.data
 
 import android.app.Application
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LiveData
 
 class UserRepository(application: Application){
@@ -9,8 +11,14 @@ class UserRepository(application: Application){
         val database= UserDatabase.getDatabase(application)
         userDao = database.userDao()
     }
-    suspend fun insertUser(user: User){
-        userDao.insertUser(user)
+    suspend fun insertUser(user: User):Boolean{
+        try {
+            userDao.insertUser(user)
+        }catch (e:Exception)
+        {
+           return false
+        }
+       return true
     }
 
      fun getSpecifiedUser(name: String): LiveData<User> {

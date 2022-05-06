@@ -1,5 +1,6 @@
 package com.revature.waitroom
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +31,7 @@ import com.revature.waitroom.data.UserViewModel
 import com.revature.waitroom.ui.theme.WaitRoomTheme
 import com.revature.waitroom.ui.theme.is_long_enough
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class SignUp : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +51,21 @@ class SignUp : ComponentActivity() {
     }
 }
 
+@SuppressLint("UnrememberedGetBackStackEntry")
 @Composable
 fun SignUp(navController: NavController,userViewModel: UserViewModel) {
+    val context = LocalContext.current
     val scope= rememberCoroutineScope()
+    try {
+        if (navController.currentBackStackEntry == navController.getBackStackEntry(Screens.Login.route)) {
+            Toast.makeText(context, "Please enter a different username", Toast.LENGTH_LONG).show()
+        }
+    }catch (e:Exception)
+    {
+
+    }
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        val context = LocalContext.current
+
         Text(text = "Create your account",fontSize = 25.sp)
         Spacer(modifier = Modifier.height(100.dp))
         Column {
@@ -71,12 +83,10 @@ fun SignUp(navController: NavController,userViewModel: UserViewModel) {
             Button(onClick = {
                 if(is_long_enough(text.value,text1.value)==true)
                 {
-                    Toast.makeText(context, "Signup successful", Toast.LENGTH_SHORT).show()
                     scope.launch {
-                            userViewModel.insertUser(User(username=text.value,password=text1.value))
+                        userViewModel.insertUser(User(username=text.value,password=text1.value),navController)
                     }
-
-                    navController.navigate(Screens.Login.route)
+                        navController.navigate(Screens.Login.route)
                 }
                 else
                 {
